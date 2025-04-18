@@ -87,11 +87,29 @@
             0% { transform: translateY(-100px); opacity: 1; }
             100% { transform: translateY(500px); opacity: 0; }
         }
+        .login-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #6a89cc;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .login-link:hover {
+            background-color: #4a6da7;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
     <div class="container" id="container">
-        <h1>Welcome to Olive's World! 🌍</h1>
+        <a href="login.html" class="login-link">Login 🔑</a>
+        <h1>Olive World! 🌍</h1>
         <div class="greeting">Welcome to the most awesome hello-world repo in the galaxy! 🚀</div>
         <button id="greetButton">Click for a Random Surprise!</button>
         <p id="personalGreeting"></p>
