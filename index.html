@@ -3,64 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>Fun Hello World</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
             text-align: center;
-            background-color: #f5f5f5;
+            background-color: #ffecb3;
             color: #333;
+            transition: background-color 0.5s;
         }
         .container {
             background-color: white;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         h1 {
-            color: #4285f4;
+            color: #ff6b6b;
+            font-size: 3rem;
+            text-shadow: 2px 2px 0 #ffec8b;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
         }
         .greeting {
             font-size: 1.5rem;
             margin: 2rem 0;
+            color: #6a89cc;
         }
         button {
-            background-color: #4285f4;
+            background-color: #ff6b6b;
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 4px;
-            font-size: 1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         button:hover {
-            background-color: #3367d6;
+            background-color: #ff8e8e;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        #personalGreeting {
+            font-size: 2rem;
+            margin-top: 2rem;
+            min-height: 3rem;
+            font-weight: bold;
+            transition: all 0.5s;
+        }
+        .emoji {
+            font-size: 3rem;
+            display: inline-block;
+            margin: 0 5px;
+            animation: spin 1s ease-in-out;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: fall 4s linear forwards;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(500px); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Hello World!</h1>
-        <div class="greeting">Welcome to my test-hello-world repository.</div>
-        <button id="greetButton">Click for Greeting</button>
+    <div class="container" id="container">
+        <h1>Howdy World! 🌍</h1>
+        <div class="greeting">Welcome to the most awesome hello-world repo in the galaxy! 🚀</div>
+        <button id="greetButton">Click for a Random Surprise!</button>
         <p id="personalGreeting"></p>
     </div>
 
     <script>
+        // Change background color randomly
+        function randomColor() {
+            const colors = ['#ffecb3', '#b3e6ff', '#ffb3e6', '#b3ffd9', '#d9b3ff'];
+            document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const container = document.getElementById('container');
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffec8b', '#6a89cc', '#ff8e8e'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+
         document.getElementById('greetButton').addEventListener('click', function() {
-            const greetings = [
-                'Hello there!',
-                'Greetings, visitor!',
-                'Welcome to my page!',
-                'Thanks for stopping by!',
-                'Hi, nice to meet you!'
+            const funnyGreetings = [
+                "👽 Greetings, Earthling! We come in peace... mostly!",
+                "🦄 Hey there, you magnificent unicorn of a human!",
+                "🤖 BEEP BOOP. HUMAN DETECTED. INITIATING FRIENDLY PROTOCOL!",
+                "🧠 Your awesomeness just broke my AI brain!",
+                "🐱 Meow there! You've cat to be kitten me right meow!",
+                "🦖 RAWRRR! That's dinosaur for 'Hello there, gorgeous!'",
+                "🍕 I was going to say hi, but then I got distracted thinking about pizza...",
+                "🥁 *Ba dum tss* You've been greeted! *crowd goes wild*",
+                "🧙‍♂️ YOU SHALL NOT PASS... without receiving my warmest welcome!",
+                "🏄‍♂️ Surf's up, dude! Riding the code waves today?"
             ];
-            const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-            document.getElementById('personalGreeting').textContent = randomGreeting;
+            
+            const randomGreeting = funnyGreetings[Math.floor(Math.random() * funnyGreetings.length)];
+            const greetingElement = document.getElementById('personalGreeting');
+            greetingElement.innerHTML = randomGreeting;
+            greetingElement.style.color = `hsl(${Math.random() * 360}, 80%, 60%)`;
+            
+            // Add emoji animation
+            const emoji = document.createElement('span');
+            emoji.className = 'emoji';
+            emoji.textContent = ['😂', '🎉', '🚀', '🦄', '🔥', '💯', '🤩', '🤪', '🥳', '👾'][Math.floor(Math.random() * 10)];
+            document.body.appendChild(emoji);
+            
+            // Position the emoji randomly
+            emoji.style.position = 'absolute';
+            emoji.style.top = Math.random() * 80 + 10 + '%';
+            emoji.style.left = Math.random() * 80 + 10 + '%';
+            
+            // Remove emoji after animation
+            setTimeout(() => {
+                emoji.remove();
+            }, 1000);
+            
+            randomColor();
+            createConfetti();
         });
     </script>
 </body>
